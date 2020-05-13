@@ -1,26 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
     <footer className="border-top text-center small text-muted py-3">
       <p>
-        <a href="/" className="mx-1">
+        <Link to="/" className="mx-1">
           Home
-        </a>{" "}
+        </Link>{" "}
         |{" "}
-        <a className="mx-1" href="/about-us">
+        <Link className="mx-1" to="/about-us">
           About Us
-        </a>{" "}
+        </Link>{" "}
         |{" "}
-        <a className="mx-1" href="/terms">
+        <Link className="mx-1" to="/terms">
           Terms
-        </a>
+        </Link>
       </p>
       <p className="m-0">
         Copyright &copy; 2020{" "}
-        <a href="/" className="text-muted">
+        <Link to="/" className="text-muted">
           Janis
-        </a>
+        </Link>
         . All rights reserved.
       </p>
     </footer>
