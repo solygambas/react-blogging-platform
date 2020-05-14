@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Axios from "axios";
+import DispatchContext from "../DispatchContext";
 
 function HeaderLoggedOut(props) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-
+  const appDispatch = useContext(DispatchContext);
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -13,10 +14,11 @@ function HeaderLoggedOut(props) {
         password,
       });
       if (response.data) {
-        localStorage.setItem("janisToken", response.data.token);
-        localStorage.setItem("janisUsername", response.data.username);
-        localStorage.setItem("janisAvatar", response.data.avatar);
-        props.setLoggedIn(true);
+        // localStorage.setItem("janisToken", response.data.token);
+        // localStorage.setItem("janisUsername", response.data.username);
+        // localStorage.setItem("janisAvatar", response.data.avatar);
+
+        appDispatch({ type: "login", data: response.data });
       } else {
         console.log("Incorrect username / password.");
       }
