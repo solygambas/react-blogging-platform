@@ -19,6 +19,7 @@ import ViewSinglePost from "./components/ViewSinglePost";
 import About from "./components/About";
 import Profile from "./components/Profile";
 import Terms from "./components/Terms";
+import NotFound from "./components/NotFound";
 
 function Main() {
   const initialState = {
@@ -93,6 +94,9 @@ function Main() {
             </Route>
             <Route path="/terms">
               <Terms />
+            </Route>
+            <Route>
+              <NotFound />
             </Route>
           </Switch>
           <Footer />
