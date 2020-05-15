@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import CreatePost from "./components/CreatePost";
 import ViewSinglePost from "./components/ViewSinglePost";
 import About from "./components/About";
+import Profile from "./components/Profile";
 import Terms from "./components/Terms";
 
 function Main() {
@@ -79,6 +80,9 @@ function Main() {
             </Route>
             <Route path="/create-post">
               <CreatePost />
+            </Route>
+            <Route path="/profile/:username">
+              <Profile />
             </Route>
             <Route path="/about-us">
               <About />
