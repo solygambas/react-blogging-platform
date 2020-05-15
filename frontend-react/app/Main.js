@@ -14,6 +14,7 @@ import HomeGuest from "./components/HomeGuest";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import CreatePost from "./components/CreatePost";
+import EditPost from "./components/EditPost";
 import ViewSinglePost from "./components/ViewSinglePost";
 import About from "./components/About";
 import Profile from "./components/Profile";
@@ -75,11 +76,14 @@ function Main() {
             <Route path="/" exact>
               {state.loggedIn ? <Home /> : <HomeGuest />}
             </Route>
-            <Route path="/post/:id">
+            <Route path="/post/:id" exact>
               <ViewSinglePost />
             </Route>
             <Route path="/create-post">
               <CreatePost />
+            </Route>
+            <Route path="/post/:id/edit" exact>
+              <EditPost />
             </Route>
             <Route path="/profile/:username">
               <Profile />

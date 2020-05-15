@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
+import ReactMarkdown from "react-markdown";
+import ReactTooltip from "react-tooltip";
 import Page from "./Page";
+import LoadingDotsIcon from "./LoadingDotsIcon";
 
 function ViewSinglePost() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState([]);
   useEffect(() => {
+    const ourRequest = Axios.CancelToken.source();
     async function fetchPost() {
       try {
-        const response = await Axios.get(`/post/${id}`);
+        const response = await Axios.get(`/post/${id}`, {
+          cancelToken: ourRequest.token,
+        });
         setPost(response.data);
         setIsLoading(false);
       } catch (e) {
@@ -18,11 +24,14 @@ function ViewSinglePost() {
       }
     }
     fetchPost();
+    return () => {
+      ourRequest.cancel();
+    };
   }, []);
   if (isLoading) {
     return (
       <Page title="...">
-        <div>Loading...</div>
+        <LoadingDotsIcon />
       </Page>
     );
   }
@@ -35,12 +44,23 @@ function ViewSinglePost() {
       <div className="d-flex justify-content-between">
         <h2>{post.title}</h2>
         <span className="pt-2">
-          <a href="#" className="text-primary mr-2" title="Edit">
+          <Link
+            to={`/post/${post._id}/edit`}
+            data-tip="Edit"
+            data-for="edit"
+            className="text-primary mr-2"
+          >
             <i className="fas fa-edit"></i>
-          </a>
-          <a className="delete-post-button text-danger" title="Delete">
+          </Link>
+          <ReactTooltip id="edit" className="custom-tooltip" />{" "}
+          <a
+            data-tip="Delete"
+            data-for="delete"
+            className="delete-post-button text-danger"
+          >
             <i className="fas fa-trash"></i>
           </a>
+          <ReactTooltip id="delete" className="custom-tooltip" />
         </span>
       </div>
 
@@ -55,7 +75,20 @@ function ViewSinglePost() {
         on {dateFormatted}
       </p>
 
-      <div className="body-content">{post.body}</div>
+      <div className="body-content">
+        <ReactMarkdown
+          source={post.body}
+          allowedTypes={[
+            "paragraph",
+            "strong",
+            "emphasis",
+            "text",
+            "heading",
+            "list",
+            "listItem",
+          ]}
+        />
+      </div>
     </Page>
   );
 }
