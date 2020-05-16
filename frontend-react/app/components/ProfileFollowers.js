@@ -3,9 +3,8 @@ import Axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import LoadingDotsIcon from "./LoadingDotsIcon";
 import StateContext from "../StateContext";
-import Post from "./Post";
 
-function ProfilePosts(props) {
+function ProfileFollowers(props) {
   const appState = useContext(StateContext);
   const { username } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +15,7 @@ function ProfilePosts(props) {
 
     async function fetchPosts() {
       try {
-        const response = await Axios.get(`/profile/${username}/posts`, {
+        const response = await Axios.get(`/profile/${username}/followers`, {
           cancelToken: ourRequest.token,
         });
         setPosts(response.data);
@@ -36,22 +35,40 @@ function ProfilePosts(props) {
   return (
     <div className="list-group">
       {posts.length > 0 &&
-        posts.map((post) => {
-          return <Post noAuthor={true} post={post} key={post._id} />;
+        posts.map((follower, index) => {
+          return (
+            <Link
+              key={index}
+              to={`/profile/${follower.username}`}
+              className="list-group-item list-group-item-action"
+            >
+              <img className="avatar-tiny" src={follower.avatar} />{" "}
+              {follower.username}
+            </Link>
+          );
         })}
       {posts.length == 0 && appState.user.username == username && (
         <p className="lead text-muted text-center">
-          You haven&rsquo;t created any posts yet;{" "}
-          <Link to="/create-post">create one now!</Link>
+          You don&rsquo;t have any followers yet.
         </p>
       )}
       {posts.length == 0 && appState.user.username != username && (
         <p className="lead text-muted text-center">
-          {username} hasn&rsquo;t created any posts yet.
+          {username} doesn&rsquo;t have any followers yet.
+          {appState.loggedIn && " Be the first to follow them!"}
+          {!appState.loggedIn && (
+            <>
+              {" "}
+              If you want to follow them you need to <Link to="/">
+                sign up
+              </Link>{" "}
+              for an account first.{" "}
+            </>
+          )}
         </p>
       )}
     </div>
   );
 }
 
-export default ProfilePosts;
+export default ProfileFollowers;
