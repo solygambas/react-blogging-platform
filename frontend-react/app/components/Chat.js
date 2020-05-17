@@ -2,12 +2,12 @@ import React, { useEffect, useContext, useRef } from "react";
 import { useImmer } from "use-immer";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
-const socket = io("http://localhost:8080");
 
 import StateContext from "../StateContext";
 import DispatchContext from "../DispatchContext";
 
 function Chat() {
+  const socket = useRef(null);
   const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
   const chatField = useRef(null);
@@ -32,11 +32,13 @@ function Chat() {
   }
 
   useEffect(() => {
-    socket.on("chatFromServer", (message) => {
+    socket.current = io(process.env.BACKENDURL);
+    socket.current.on("chatFromServer", (message) => {
       setState((draft) => {
         draft.chatMessages.push(message);
       });
     });
+    return () => socket.current.disconnect();
   }, []);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ function Chat() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    socket.emit("chatFromBrowser", {
+    socket.current.emit("chatFromBrowser", {
       message: state.fieldValue,
       token: appState.user.token,
     });
