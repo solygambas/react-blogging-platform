@@ -32,7 +32,9 @@ function Chat() {
   }
 
   useEffect(() => {
-    socket.current = io(process.env.BACKENDURL);
+    socket.current = io(
+      process.env.BACKENDURL || "https://react-blogging-platform.herokuapp.com"
+    );
     socket.current.on("chatFromServer", (message) => {
       setState((draft) => {
         draft.chatMessages.push(message);
