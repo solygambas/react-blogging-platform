@@ -13,8 +13,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solygambas/react-blogging-platform.git"
+  },
+  "author": "solygambas",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/solygambas/react-blogging-platform/issues"
+  },
+  "homepage": "https://github.com/solygambas/react-blogging-platform#readme",
   "dependencies": {
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
