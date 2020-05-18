@@ -4,7 +4,12 @@ const postController = require("./controllers/postController")
 const followController = require("./controllers/followController")
 const cors = require("cors")
 
-apiRouter.use(cors())
+const corsOptions = {
+  origin: 'https://react-blogging-platform.netlify.app/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+apiRouter.use(cors(corsOptions))
 
 apiRouter.get("/", (req, res) => res.json("Hello, if you see this message that means your backend is up and running successfully. Congrats! Now let's continue learning React!"))
 
