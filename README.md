@@ -1,6 +1,6 @@
 # Blogging Platform
 
-A blogging platform using React Hooks.
+A blogging platform using React Hooks, MongoDB Atlas, Express and Node.js.
 
 ## Demo
 
