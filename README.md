@@ -6,7 +6,11 @@ A blogging platform using React Hooks, MongoDB Atlas, Express and Node.js.
 
 [See Demo deployed on Netlify](https://react-blogging-platform.netlify.app/)
 
-![](screenshot.png)
+<p align="center">
+  <a href="https://react-blogging-platform.netlify.app/">
+    <img src="screenshot.png" alt="See Demo deployed on Netlify">
+  </a>
+</p>
 
 ## Core features
 
