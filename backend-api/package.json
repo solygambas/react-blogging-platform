@@ -29,7 +29,7 @@
     "mongodb": "^3.5.5",
     "nodemon": "^2.0.2",
     "sanitize-html": "^1.22.1",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "validator": "^13.0.0"
   }
 }
