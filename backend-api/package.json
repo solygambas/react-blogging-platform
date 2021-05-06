@@ -28,7 +28,7 @@
     "md5": "^2.2.1",
     "mongodb": "^3.5.5",
     "nodemon": "^2.0.2",
-    "sanitize-html": "^1.22.1",
+    "sanitize-html": "^2.3.2",
     "socket.io": "^2.3.0",
     "validator": "^13.0.0"
   }
