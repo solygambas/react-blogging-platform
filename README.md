@@ -60,7 +60,7 @@ A blogging platform using React Hooks, MongoDB Atlas, Express and Node.js.
 
 ## Deployment
 
-- deploying the back-end on Heroku.
+- deploying the back-end on Render.
 - deploying the front-end on Netlify.
 
 Based on [React For The Rest Of Us](https://www.udemy.com/course/react-for-the-rest-of-us/) by Brad Schiff (2020).
